@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    esxi = {
+      source = "registry.terraform.io/josenk/esxi"
+    }
+  }
+}
+
 provider "esxi" {
   esxi_hostname = var.esxi_hostname
   esxi_hostport = var.esxi_hostport
