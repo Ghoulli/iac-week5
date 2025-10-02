@@ -1,0 +1,31 @@
+name: Terraform Destroy (manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  destroy:
+    runs-on: [self-hosted]   # pas labels aan
+    defaults:
+      run:
+        working-directory: terraform
+    env:
+      TF_IN_AUTOMATION: "true"
+      TF_VAR_esxi_password: ${{ secrets.TF_VAR_esxi_password }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "1.7.5" }
+
+      - name: Check ovftool present
+        run: |
+          if ! command -v ovftool >/dev/null 2>&1; then
+            echo "::error::ovftool is not installed or not in PATH on this self-hosted runner."
+            exit 1
+          fi
+
+      - name: terraform init
+        run: terraform init -input=false
+
+      - name: terraform destroy
+        run: terraform destroy -auto-approve
