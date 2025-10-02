@@ -14,10 +14,9 @@ provider "esxi" {
   esxi_hostssl        = var.esxi_hostssl
   esxi_username       = var.esxi_username
   esxi_password       = var.esxi_password
-  esxi_validate_certs = false
 }
 
-# cloud-init user-data voor Ubuntu 24.04 OVA1
+# cloud-init user-data voor Ubuntu 24.04 OVA
 locals {
   cloud_init = <<-EOT
     #cloud-config
