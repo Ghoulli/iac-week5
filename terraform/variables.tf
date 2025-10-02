@@ -11,7 +11,7 @@ variable "esxi_hostport" {
 }
 
 variable "esxi_hostssl" {
-  default     = "443"
+  default = "443"
 }
 
 variable "esxi_username" {
@@ -23,8 +23,8 @@ variable "esxi_username" {
 variable "esxi_password" {
   description = "ESXi password"
   type        = string
-#  sensitive   = true
-  default     = "Welkom01!"
+  #  sensitive   = true
+  default = "Welkom01!"
 }
 
 variable "disk_store" {
@@ -60,7 +60,7 @@ variable "vcpu" {
 variable "ssh_public_key" {
   description = "Your ED25519 SSH public key"
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAe8Ilbjo2qjAKgneNmebSczNm06KuTrUbhZTlOj9PQe student@DESKTOP-1NUD89T" 
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAe8Ilbjo2qjAKgneNmebSczNm06KuTrUbhZTlOj9PQe student@DESKTOP-1NUD89T"
 }
 
 variable "vm_user" {
