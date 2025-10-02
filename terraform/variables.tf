@@ -26,7 +26,7 @@ variable "esxi_password" {
   description = "ESXi password"
   type        = string
   # sensitive = true   # zet dit gerust aan als je secrets niet via Secrets-doorzet
-  default     = "Welkom01!"
+  default = "Welkom01!"
 }
 
 variable "disk_store" {
