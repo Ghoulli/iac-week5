@@ -5,26 +5,12 @@
   gather_facts: true
 
   tasks:
-    - name: Testen of apache2 al is geinstalleerd is
-      ansible.builtin.command: dpkg -s apache2
-      register: apache2_dpkg
-      ignore_errors: true
-
-    - name: Installeren apache2
-      ansible.builtin.shell: |
-        apt update
-        apt install -y apache2
-      when: apache2_dpkg.rc != 0
-      register: install_out
-      changed_when: install_out.rc == 0 and ('Setting up apache2' in install_out.stdout or 'apache2 is already the newest version' not in install_out.stdout)
-      failed_when: >
-        install_out.rc != 0 and
-        (
-          'Setting up apache2' not in install_out.stdout and
-          'apache2 is already the newest version' not in install_out.stdout
-        )
-        
+    - name: Zorg dat apache2 is geïnstalleerd
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
     - name: Opzettelijke fout
       ansible.builtin.fail:
         msg: "Dit is een opzettelijke foutmelding voor testdoeleinden."
-      when: true  # Verander naar 'false' om de fout te vermijden
+      when: true  # Verander naar 'false' om de fout te vermijden ivm test
