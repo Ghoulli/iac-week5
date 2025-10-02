@@ -5,13 +5,15 @@ variable "esxi_hostname" {
 }
 
 variable "esxi_hostport" {
-  description = "ESXi port"
+  description = "ESXi SSH port"
   type        = number
-  default     = "22"
+  default     = 22
 }
 
 variable "esxi_hostssl" {
-  default = "443"
+  description = "ESXi HTTPS port"
+  type        = number
+  default     = 443
 }
 
 variable "esxi_username" {
@@ -23,8 +25,8 @@ variable "esxi_username" {
 variable "esxi_password" {
   description = "ESXi password"
   type        = string
-  #  sensitive   = true
-  default = "Welkom01!"
+  # sensitive = true   # zet dit gerust aan als je secrets niet via Secrets-doorzet
+  default     = "Welkom01!"
 }
 
 variable "disk_store" {
@@ -60,11 +62,4 @@ variable "vcpu" {
 variable "ssh_public_key" {
   description = "Your ED25519 SSH public key"
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAe8Ilbjo2qjAKgneNmebSczNm06KuTrUbhZTlOj9PQe student@DESKTOP-1NUD89T"
-}
-
-variable "vm_user" {
-  description = "Username to create on VMs"
-  type        = string
-  default     = "terraformuser"
-}
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAe8Ilbjo2qjAKgneN

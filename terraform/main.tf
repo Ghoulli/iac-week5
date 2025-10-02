@@ -5,7 +5,25 @@ provider "esxi" {
   esxi_username = var.esxi_username
   esxi_password = var.esxi_password
 }
-#effe test voro change
+
+# cloud-init user-data voor Ubuntu 24.04 OVA
+locals {
+  cloud_init = <<-EOT
+    #cloud-config
+    users:
+      - name: ${var.vm_user}
+        groups: [sudo]
+        shell: /bin/bash
+        sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+        ssh_authorized_keys:
+          - ${var.ssh_public_key}
+    ssh_pwauth: false
+    package_update: true
+    runcmd:
+      - [ sh, -c, "echo 'Deployed via Terraform on ESXi' > /etc/motd" ]
+  EOT
+}
+
 resource "esxi_guest" "vm" {
   guest_name = "tf-ubuntu-demo"
   disk_store = var.disk_store
@@ -17,5 +35,11 @@ resource "esxi_guest" "vm" {
 
   network_interfaces {
     virtual_network = var.network_name
+  }
+
+  # Geef cloud-init door via OVF/guestinfo properties (OVA moet dit ondersteunen)
+  ovf_properties = {
+    "guestinfo.userdata"          = base64encode(local.cloud_init)
+    "guestinfo.userdata.encoding" = "base64"
   }
 }
