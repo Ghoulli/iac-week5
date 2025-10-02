@@ -62,4 +62,11 @@ variable "vcpu" {
 variable "ssh_public_key" {
   description = "Your ED25519 SSH public key"
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAe8Ilbjo2qjAKgneN
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAe8Ilbjo2qjAKgneNmebSczNm06KuTrUbhZTlOj9PQe student@DESKTOP-1NUD89T"
+}
+
+variable "vm_user" {
+  description = "Username to create on VMs"
+  type        = string
+  default     = "terraformuser"
+}
