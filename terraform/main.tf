@@ -37,9 +37,13 @@ resource "esxi_guest" "vm" {
     virtual_network = var.network_name
   }
 
-  # Geef cloud-init door via OVF/guestinfo properties (OVA moet dit ondersteunen)
-  ovf_properties = {
-    "guestinfo.userdata"          = base64encode(local.cloud_init)
-    "guestinfo.userdata.encoding" = "base64"
+  ovf_properties {
+    key   = "guestinfo.userdata"
+    value = base64encode(local.cloud_init)
+  }
+
+  ovf_properties {
+    key   = "guestinfo.userdata.encoding"
+    value = "base64"
   }
 }
