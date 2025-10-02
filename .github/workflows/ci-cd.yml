@@ -43,7 +43,7 @@ jobs:
       - name: ansible-playbook --syntax-check
         working-directory: ansible
         run: |
-          ansible-playbook playbook.yml --syntax-check
+          ansible-playbook playbook_opdr2.yml --syntax-check
 
   dry-run:
     name: Dry-run (check mode)
@@ -60,7 +60,7 @@ jobs:
       - name: Dry-run playbook
         working-directory: ansible
         run: |
-          ansible-playbook -i "localhost," -c local playbook.yml --check
+          ansible-playbook -i "localhost," -c local playbook_opdr2.yml --check
 
   deploy:
     name: Deploy (uitvoeren playbook)
@@ -79,4 +79,4 @@ jobs:
       - name: Deploy to self-hosted runner (LOCAL)
         working-directory: ansible
         run: |
-          ansible-playbook -i "localhost," -c local playbook.yml
+          ansible-playbook -i "localhost," -c local playbook_opdr2.yml
