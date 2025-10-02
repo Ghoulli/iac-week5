@@ -45,17 +45,20 @@ jobs:
       - name: terraform fmt (check)
         run: terraform fmt -check -diff
 
-      - name: Set up TFLint
-        uses: terraform-linters/setup-tflint@v4
-        with:
-          tflint_version: v0.59.1   # of laat weg voor latest
+      - name: Install tflint (local ./bin) + add to PATH
+        run: |
+          mkdir -p bin
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh \
+            | bash -s -- -b "$PWD/bin"
+          echo "$PWD/bin" >> "$GITHUB_PATH"
+          which tflint
+          tflint --version
 
       - name: TFLint (best practices)
-        working-directory: terraform
         run: |
           tflint --init
           tflint
-          
+
       - name: terraform init
         run: terraform init -input=false
 
