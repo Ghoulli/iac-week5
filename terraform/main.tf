@@ -16,7 +16,7 @@ provider "esxi" {
   esxi_password = var.esxi_password
 }
 
-# cloud-init user-data voor Ubuntu 24.04 OVA1
+# cloud-init user-data voor Ubuntu 24.04 OVA
 locals {
   cloud_init = <<-EOT
     #cloud-config
