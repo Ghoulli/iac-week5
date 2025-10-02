@@ -1,0 +1,22 @@
+---
+- name: Install and start nginx on Ubuntu
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Ensure nginx is installed
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Ensure nginx service is enabled and running
+      ansible.builtin.service:
+        name: nginx
+        enabled: true
+        state: started
