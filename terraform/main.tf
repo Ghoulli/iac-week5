@@ -5,7 +5,7 @@ provider "esxi" {
   esxi_username = var.esxi_username
   esxi_password = var.esxi_password
 }
-
+#effe test voro change
 resource "esxi_guest" "vm" {
   guest_name = "tf-ubuntu-demo"
   disk_store = var.disk_store
